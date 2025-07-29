@@ -1,0 +1,8 @@
+# Ignore all contents of the data folder
+data/*
+!data/.gitkeep
+
+# Ignore Python/Jupyter cache files
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
