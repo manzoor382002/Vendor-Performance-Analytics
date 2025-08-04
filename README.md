@@ -1,133 +1,141 @@
-# 📊 Vendor Performance Analytics Project
+# 🧾 Vendor Performance Analysis – Retail Inventory & Sales
 
-This project is designed to analyze and optimize vendor performance based on historical purchase data, inventory movements, and invoice validations. It combines **data engineering**, **Python scripting + SQLlite**, **Power BI Dashboard,  Business Insight Reporting**, and **exploratory data analysis (EDA)** to produce a clear vendor efficiency dashboard.
+Analyzing vendor efficiency and profitability to support strategic purchasing and inventory decisions using SQL, Python, and Power BI.
 
-> **Note**: `Sales.csv & Purchases.csv` is > 1GB and excluded from GitHub.
+## 📌 Table of Contents
+- Overview  
+- Business Problem  
+- Dataset  
+- Tools & Technologies  
+- Project Structure  
+- Data Cleaning & Preparation  
+- Exploratory Data Analysis (EDA)  
+- Research Questions & Key Findings  
+- Dashboard  
+- How to Run This Project  
+- Final Recommendations  
+- Author & Contact  
+
+## Overview  
+This project evaluates vendor performance and retail inventory dynamics to drive strategic insights for purchasing, pricing, and inventory optimization. A complete data pipeline was built using SQL for ETL, Python for analysis and hypothesis testing, and Power BI for visualization.  
+
+## Business Problem  
+Effective inventory and sales management are critical in the retail sector. This project aims to:  
+- Identify underperforming brands needing pricing or promotional adjustments  
+- Determine vendor contributions to sales and profits  
+- Analyze the cost-benefit of bulk purchasing  
+- Investigate inventory turnover inefficiencies  
+- Statistically validate differences in vendor profitability  
+
+## Dataset  
+Multiple CSV files located in `/data/` folder (sales, vendors, inventory)  
+Summary table created from ingested data and used for analysis  
+
+## Tools & Technologies  
+- SQL (Common Table Expressions, Joins, Filtering)  
+- Python (Pandas, Matplotlib, Seaborn, SciPy)  
+- Power BI (Interactive Visualizations)  
+- GitHub
 ---
 
-## 🎯 Project Goals
-
-- Ingest and preprocess raw inventory and purchase data.
-- Detect inconsistencies in vendor invoicing.
-- Analyze inventory inflow/outflow patterns.
-- Generate visual dashboards for vendor evaluation.
-- Identify high-performing vendors and cost leakages.
-
---
-## 📁 Folder & File Structure
-
-```
-Vendor Performance Project/
-├── 01_data/                   # Raw input datasets (CSV)
-├── 02_logs/                   # Logging & intermediate outputs
-├── .ipynb_checkpoints/        # Auto-saved notebook versions
-├── Exploratory Data Analysis.ipynb   # Visual data insights
-├── Inventory_db.ipynb         # Inventory-specific analysis
-├── get_vendor_summary.py      # Summary script for vendors
-├── ingestion_db.py            # Data ingestion pipeline
-├── vendor_performance.pbix    # Power BI dashboard file
-├── README.md                  # Project documentation
-└── .gitignore                 # Files/folders excluded from Git
-```
-
-
-
+## Project Structure  
+vendor-performance-analysis/
+│
+├── README.md
+├── .gitignore
+├── requirements.txt
+├── Vendor Performance Report.pdf
+│
+├── notebooks/ # Jupyter notebooks
+│ ├── exploratory_data_analysis.ipynb
+│ ├── vendor_performance_analysis.ipynb
+│
+├── scripts/ # Python scripts for ingestion and processing
+│ ├── ingestion_db.py
+│ └── get_vendor_summary.py
+│
+├── dashboard/ # Power BI dashboard file
+│ └── vendor_performance_dashboard.pbix
 ---
 
-## 🔁 Workflow Overview
+## Data Cleaning & Preparation  
+- Removed transactions with:  
+  - Gross Profit ≤ 0  
+  - Profit Margin ≤ 0  
+  - Sales Quantity = 0  
+- Created summary tables with vendor-level metrics  
+- Converted data types, handled outliers, merged lookup tables  
 
-### 1️⃣ Data Ingestion (`ingestion_db.py`)
-- Reads multiple raw datasets: inventory, vendor purchases, prices, invoices.
-- Cleans nulls, removes duplicates.
-- Validates schema and logs status in `02_logs/`.
+## Exploratory Data Analysis (EDA)  
 
-### 2️⃣ Data Transformation (`get_vendor_summary.py`)
-- Merges and aggregates data by:
-  - Vendor
-  - Invoice correctness
-  - Purchase quantity/value
-- Generates structured output tables for dashboard integration.
+**Negative or Zero Values Detected:**  
+- Gross Profit: Min -52,002.78 (loss-making sales)  
+- Profit Margin: Min -∞ (sales at zero or below cost)  
+- Unsold Inventory: Indicating slow-moving stock  
 
-### 3️⃣ Exploratory Data Analysis (`Exploratory Data Analysis.ipynb`)
-- Plots trends:
-  - Purchase volume by vendor
-  - Price variation across periods
-  - Inventory flow vs. demand
-- Visuals created using `matplotlib`, `seaborn`.
+**Outliers Identified:**  
+- High Freight Costs (up to 257K)  
+- Large Purchase/Actual Prices  
 
-### 4️⃣ Inventory Deep Dive (`Inventory_db.ipynb`)
-- Calculates:
-  - Inventory changes over time
-  - Overstock/understock patterns
-- Compares `begin_inventory` vs `end_inventory`.
+**Correlation Analysis:**  
+- Weak between Purchase Price & Profit  
+- Strong between Purchase Qty & Sales Qty (0.999)  
+- Negative between Profit Margin & Sales Price (-0.179)  
 
-### 5️⃣ Power BI Dashboard (`vendor_performance.pbix`)
-- Visual representation of:
-  - Top vendors by volume/value
-  - Average purchase price
-  - Invoice correctness %
-  - Time series trends
+## Research Questions & Key Findings  
+**Brands for Promotions:** 198 brands with low sales but high profit margins  
+**Top Vendors:** Top 10 vendors = 65.69% of purchases → risk of over-reliance  
+**Bulk Purchasing Impact:** 72% cost savings per unit in large orders  
+**Inventory Turnover:** $2.71M worth of unsold inventory  
+**Vendor Profitability:**  
+- High Vendors: Mean Margin = 31.17%  
+- Low Vendors: Mean Margin = 41.55%  
 
----
+**Hypothesis Testing:**  
+Statistically significant difference in profit margins → distinct vendor strategies  
 
-### Data Ingestion: Dataframe to Database
-- The project includes a dedicated ingestion pipeline that automates the process of loading CSV data into a structured relational database for further analysis and reporting.
-- Script: ingestion_db.py
-  This script performs the following:
-   -Connects to SQLite Database
-   -Creates or connects to inventory.db.
-   -All tables are created if they don’t exist already.
--Reads Data from CSV Files
-  -Located in the 01_data/ folder.
--Reads multiple CSVs: vendors.csv, invoices.csv, purchases.csv, etc.
--Cleans & Validates Data & Removes duplicates.
-  -Handles missing values where appropriate.
--Formats columns (e.g., date parsing, data types).
--Creates Tables
-  -Uses pandas.DataFrame.to_sql() to load data.
+## Dashboard  
+Power BI Dashboard shows:  
+- Vendor-wise Sales and Margins  
+- Inventory Turnover  
+- Bulk Purchase Savings  
+- Performance Heatmaps  
 
+`dashboard/vendor_performance_dashboard.pbix`  
 
+## How to Run This Project  
+1. Clone the repository:  
 
+git clone https://github.com/manzoor382002/vendor-performance-analysis.git
+
+2. Load the CSVs and ingest into database:  
+python scripts/ingestion_db.py
 
 
-## 🧾 Input Datasets (in `01_data/`)
+3. Create vendor summary table:  
+python scripts/get_vendor_summary.py
 
-| File Name              | Description                          |
-|------------------------|--------------------------------------|
-| `begin_inventory.csv`  | Starting stock levels by product     |
-| `end_inventory.csv`    | Ending stock levels                  |
-| `purchase_prices.csv`  | Item-wise vendor pricing             |
-| `purchases.csv`        | Main transaction dataset (large)     |
-| `vendor_invoice.csv`   | Vendor billing and invoice details   |
 
-> **Note**: `purchases.csv  `Sales.csv ` `is >1GB and excluded from GitHub.
----
+4. Open and run notebooks:  
+- `notebooks/exploratory_data_analysis.ipynb`  
+- `notebooks/vendor_performance_analysis.ipynb`  
 
-## 📈 Statistical Analysis & Hypothesis Testing
+5. Open Power BI Dashboard:  
+- `dashboard/vendor_performance_dashboard.pbix`  
 
-As part of our **Vendor Performance Analytics**, statistical methods were employed to validate assumptions and provide data-driven insights into vendor behavior, pricing differences, and invoice reliability. These techniques ensure that decisions are **objective**, **quantifiable**, and **auditable**.
+## Final Recommendations  
+- Diversify vendor base to reduce risk  
+- Optimize bulk order strategies  
+- Reprice slow-moving, high-margin brands  
+- Clear unsold inventory strategically  
+- Improve marketing for underperforming vendors  
 
----
+## Author & Contact  
+- Baig Manzoor
+- Email : manzoor382002@gmail.com
 
-### 🎯 Objectives
-- Determine whether different vendors charge significantly different prices.
-- Identify if invoice discrepancies are more frequent with specific vendors.
-- Statistically validate patterns observed in the exploratory data analysis.
 
----
 
-### 1️⃣ T-Test: Comparing Vendor Prices
-
-An **Independent Samples T-Test** was used to compare the average product prices between two vendors (e.g., *Vendor A* and *Vendor B*).
-
-#### 🔬 Hypotheses
-
-- **H₀ (Null Hypothesis):** There is **no significant difference** in average prices between vendors.  
-- **H₁ (Alternative Hypothesis):** There **is a significant difference** in average prices between vendors.
-
-> If the **p-value < 0.05**, the null hypothesis is rejected, indicating that the pricing difference between vendors is **statistically significant**.
-
----
 
 These tests contribute to more accurate **vendor selection**, **cost optimization**, and **invoice auditing** in a business intelligence context.
 
