@@ -108,22 +108,22 @@ Power BI Dashboard shows:
 ## How to Run This Project  
 1. Clone the repository:  
 
-git clone https://github.com/manzoor382002/vendor-performance-analysis.git
+`git clone https://github.com/manzoor382002/vendor-performance-analysis.git`
 
 2. Load the CSVs and ingest into database:  
-python scripts/ingestion_db.py
+`ingestion_db.py`
 
 
 3. Create vendor summary table:  
-python scripts/get_vendor_summary.py
+`get_vendor_summary.py`
 
 
 4. Open and run notebooks:  
-- `notebooks/exploratory_data_analysis.ipynb`  
-- `notebooks/vendor_performance_analysis.ipynb`  
+- `exploratory_data_analysis.ipynb`  
+- `vendor_performance_analysis.ipynb`  
 
 5. Open Power BI Dashboard:  
-- `dashboard/vendor_performance_dashboard.pbix`  
+- `dashboard/vendor_performance.pbix`  
 
 ## Final Recommendations  
 - Diversify vendor base to reduce risk  
