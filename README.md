@@ -103,7 +103,7 @@ Power BI Dashboard shows:
 - Bulk Purchase Savings  
 - Performance Heatmaps  
 
-`dashboard/vendor_performance_dashboard.pbix`  
+ [View Dashboard Preview (PDF)](vendor_performance.pdf) 
 
 ## How to Run This Project  
 1. Clone the repository:  
