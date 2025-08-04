@@ -38,24 +38,26 @@ Summary table created from ingested data and used for analysis
 - GitHub
 ---
 
-## Project Structure  
-vendor-performance-analysis/
-│
-├── README.md
-├── .gitignore
-├── requirements.txt
-├── Vendor Performance Report.pdf
-│
-├── notebooks/ # Jupyter notebooks
-│ ├── exploratory_data_analysis.ipynb
-│ ├── vendor_performance_analysis.ipynb
-│
-├── scripts/ # Python scripts for ingestion and processing
-│ ├── ingestion_db.py
-│ └── get_vendor_summary.py
-│
-├── dashboard/ # Power BI dashboard file
-│ └── vendor_performance_dashboard.pbix
+## Project Structure
+
+vendor-performance-analysis/  
+│  
+├── README.md  
+├── .gitignore  
+├── requirements.txt  
+├── Vendor Performance Report.pdf  
+│  
+├── notebooks/                  # Jupyter notebooks  
+│   ├── exploratory_data_analysis.ipynb  
+│   └── vendor_performance_analysis.ipynb  
+│  
+├── scripts/                    # Python scripts for ingestion and processing  
+│   ├── ingestion_db.py  
+│   └── get_vendor_summary.py  
+│  
+└── dashboard/                  # Power BI dashboard file  
+    └── vendor_performance_dashboard.pbix  
+
 ---
 
 ## Data Cleaning & Preparation  
