@@ -103,11 +103,12 @@ Power BI Dashboard shows:
 - Bulk Purchase Savings  
 - Performance Heatmaps  
 
- ## Dashboard Preview
+##  Dashboard Preview
 
 Here is the Vendor Performance Dashboard:
 
-![Dashboard](https://github.com/manzoor382002/Vendor-Performance-Analytics/blob/main/Dashboard/Screenshot%202025-09-01%20155209.png?raw=true)
+![Vendor Performance Dashboard](https://github.com/manzoor382002/Vendor-Performance-Analytics/blob/main/Dashboard/Vendor%20Perfomance.png?raw=true)
+
 
 ## How to Run This Project  
 1. Clone the repository:  
